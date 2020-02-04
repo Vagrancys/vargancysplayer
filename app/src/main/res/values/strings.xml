@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">VargancysPlayer</string>
+    <string name="splash_title">正在启动中</string>
+    <string name="layout_empty">没有数据！</string>
+    <string name="video_title">10_1.mp4</string>
+    <string name="video_time">10:20</string>
+    <string name="video_size">51M</string>
+</resources>

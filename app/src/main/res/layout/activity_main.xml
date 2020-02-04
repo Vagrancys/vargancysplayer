@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/main_toolbar"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:overScrollMode="never"/>
+    <com.flyco.tablayout.CommonTabLayout
+        android:id="@+id/common_tab"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_size_60dp"
+        android:layout_gravity="bottom"
+        app:tl_tab_space_equal="true"
+        app:tl_indicator_anim_enable="true"
+        app:tl_indicator_anim_duration="250"
+        app:tl_iconWidth="@dimen/margin_size_20dp"
+        app:tl_iconHeight="@dimen/margin_size_20dp"
+        app:tl_iconMargin="@dimen/margin_size_5dp"
+        app:tl_textSelectColor="@color/pink"
+        app:tl_textUnselectColor="@color/grey"
+        app:tl_textsize="@dimen/text_size_12sp"
+        app:tl_underline_color="@color/white_1"
+        app:tl_underline_gravity="TOP"
+        app:tl_underline_height="1dp"/>
+</LinearLayout>
