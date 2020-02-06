@@ -1,12 +1,16 @@
 package com.vargancys.vargancysplayer.module.home.data;
 
+import android.os.Parcel;
+
+import java.io.Serializable;
+
 /**
  * author: Vagrancy
  * e-mail: 18050829067@163.com
  * time  : 2020/02/03
  * version:1.0
  */
-public class MediaInfo {
+public class MediaInfo implements Serializable {
     private String name;
     private long duration;
     private long size;
@@ -51,5 +55,13 @@ public class MediaInfo {
 
     public void setArtist(String artist) {
         this.artist = artist;
+    }
+
+    @Override
+    public String toString() {
+        return "[MediaInfo : name = "+name+",duration ="+
+                duration+",size ="+
+                size+",data = "+
+                data+",artist ="+artist+"]";
     }
 }

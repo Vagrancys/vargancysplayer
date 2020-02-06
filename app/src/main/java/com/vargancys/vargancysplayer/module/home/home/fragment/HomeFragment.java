@@ -76,19 +76,19 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onItemClick(int position, RecyclerView.ViewHolder holder) {
                 Toast.makeText(getContext(),""+medias.get(position).getName(),Toast.LENGTH_LONG).show();
-                startVideo(medias.get(position));
+                startVideo(medias.get(position),position);
             }
         });
     }
 
-    private void startVideo(MediaInfo media){
+    private void startVideo(MediaInfo media,int position){
         //调用系统所有的播放器
         //Intent intent = new Intent();
         //intent.setDataAndType(Uri.parse(media.getData()),"video/*");
         //startActivity(intent);
 
         //调用自己的播放器
-        VideoPlayerActivity.launch(getActivity(),media.getData());
+        VideoPlayerActivity.launch(getActivity(),media.getData(),medias,position);
     }
 
     private void getDataFromLocal() {

@@ -22,7 +22,10 @@
         <activity android:name=".module.common.MainActivity"/>
 
         <activity android:name=".module.common.VideoPlayerActivity"
-            android:configChanges="orientation|screenLayout|keyboardHidden"/>
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+            android:configChanges="orientation|screenLayout|keyboardHidden"
+            android:launchMode="singleTop"/>
     </application>
 
 </manifest>
