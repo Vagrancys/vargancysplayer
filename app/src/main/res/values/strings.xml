@@ -5,4 +5,6 @@
     <string name="video_title">10_1.mp4</string>
     <string name="video_time">10:20</string>
     <string name="video_size">51M</string>
+    <string name="buffer_title">缓存中.....</string>
+    <string name="loading_title">加载中...</string>
 </resources>
