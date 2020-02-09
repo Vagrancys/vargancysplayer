@@ -1,16 +1,12 @@
 package com.vargancys.vargancysplayer.module.home.data;
 
-import android.os.Parcel;
-
-import java.io.Serializable;
-
 /**
  * author: Vagrancy
  * e-mail: 18050829067@163.com
- * time  : 2020/02/03
+ * time  : 2020/02/09
  * version:1.0
  */
-public class MediaInfo implements Serializable {
+public class MusicInfo {
     private String name;
     private long duration;
     private long size;

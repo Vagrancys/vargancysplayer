@@ -24,7 +24,7 @@
 
         <activity android:name=".module.common.VideoPlayerActivity"
             android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+            android:theme="@style/noAnimation_Theme"
             android:configChanges="orientation|screenLayout|keyboardHidden"
             android:launchMode="singleTop">
             <intent-filter>
@@ -43,6 +43,9 @@
                 <data android:mimeType="video/3gpp" />
                 <data android:mimeType="video/3gpp2" />
             </intent-filter>
+        </activity>
+        <activity android:name=".module.common.MusicPlayerActivity">
+
         </activity>
     </application>
 

@@ -1,8 +1,10 @@
 package com.vargancys.vargancysplayer.module.common;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
@@ -351,6 +353,7 @@ public class VideoPlayerActivity extends BaseActivity implements View.OnClickLis
 
         LayoutRelative.setOnClickListener(this);
         btnVoice.setOnClickListener(this);
+        btnSwitch.setOnClickListener(this);
     }
 
     private void setListener(){
@@ -380,6 +383,7 @@ public class VideoPlayerActivity extends BaseActivity implements View.OnClickLis
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
                 Toast.makeText(VideoPlayerActivity.this, "错误", Toast.LENGTH_LONG).show();
+                startVitamioPlayer();
                 return false;
             }
         });
@@ -464,6 +468,28 @@ public class VideoPlayerActivity extends BaseActivity implements View.OnClickLis
         });
     }
 
+    //不能播放视频
+    private void showErrorDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("提示");
+        builder.setMessage("抱歉,无法播放该视频!");
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        builder.show();
+    }
+
+    //跳转万能播放器vitamio
+    private void startVitamioPlayer(){
+        if(mVideo != null){
+            mVideo.stopPlayback();
+        }
+        finish();
+    }
+
     //设置音量的大小
     private void updateVoice(int progress,boolean isMute) {
         if(isMute){
@@ -489,12 +515,16 @@ public class VideoPlayerActivity extends BaseActivity implements View.OnClickLis
 
     @OnClick({R.id.btn_video_start_pause,
             R.id.btn_video_pre,R.id.btn_video_next,
-            R.id.btn_exit,R.id.btn_video_switch_screen,R.id.btn_voice})
+            R.id.btn_exit,R.id.btn_video_switch_screen,
+            R.id.btn_voice,R.id.btn_switch})
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_voice:
                 isMute = !isMute;
                 updateVoice(currentVoice,isMute);
+                break;
+            case R.id.btn_switch:
+                showSwitchPlayerDialog();
                 break;
             case R.id.btn_video_start_pause:
                 startAndPause();
@@ -516,6 +546,20 @@ public class VideoPlayerActivity extends BaseActivity implements View.OnClickLis
         }
         handler.removeMessages(HIDE);
         handler.sendEmptyMessageDelayed(HIDE,4000);
+    }
+
+    private void showSwitchPlayerDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("提示");
+        builder.setMessage("当视频播放不正常时?");
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startVitamioPlayer();
+            }
+        });
+        builder.setNegativeButton("取消",null);
+        builder.show();
     }
 
     private void playNextVideo(){
@@ -623,6 +667,7 @@ public class VideoPlayerActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     protected void onDestroy() {
+        handler.removeCallbacksAndMessages(null);
         if(receiver != null){
             unregisterReceiver(receiver);
             receiver = null;

@@ -75,12 +75,11 @@ public class HomeFragment extends BaseFragment {
         mHome.setItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position, RecyclerView.ViewHolder holder) {
-                Toast.makeText(getContext(),""+medias.get(position).getName(),Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext(),""+medias.get(position).getName(),Toast.LENGTH_LONG).show();
                 startVideo(medias.get(position),position);
             }
         });
     }
-
     private void startVideo(MediaInfo media,int position){
         //调用系统所有的播放器
         //Intent intent = new Intent();
@@ -90,6 +89,7 @@ public class HomeFragment extends BaseFragment {
         //调用自己的播放器
         VideoPlayerActivity.launch(getActivity(),media.getData(),medias,position);
     }
+
 
     private void getDataFromLocal() {
         new Thread() {

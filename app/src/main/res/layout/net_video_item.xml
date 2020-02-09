@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/layout_relative"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/margin_size_120dp">
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="@dimen/margin_size_120dp"
+        android:layout_height="@dimen/margin_size_100dp"
+        android:layout_marginTop="@dimen/margin_size_10dp"
+        android:layout_marginStart="@dimen/margin_size_10dp">
+        <ImageView
+            android:id="@+id/video_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/icon_video"
+            android:scaleType="fitXY"/>
+        <ImageView
+            android:layout_width="@dimen/margin_size_30dp"
+            android:layout_height="@dimen/margin_size_30dp"
+            android:layout_gravity="end|bottom"
+            android:src="@drawable/net_video"
+            android:layout_marginEnd="@dimen/margin_size_10dp"
+            android:layout_marginBottom="@dimen/margin_size_10dp"/>
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:id="@+id/layout_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/frame"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical"
+        android:layout_marginStart="@dimen/margin_size_10dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/video_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/video_title"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_18sp"
+            android:singleLine="true"/>
+        <TextView
+            android:id="@+id/video_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/video_time"
+            android:textColor="@color/black_1"
+            android:textSize="@dimen/text_size_18sp"
+            android:singleLine="true"
+            android:layout_marginTop="@dimen/margin_size_20dp"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_size_1dp"
+        android:background="@color/black_1"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/margin_size_10dp"/>
+</RelativeLayout>
