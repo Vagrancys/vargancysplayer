@@ -1,6 +1,4 @@
-package com.vargancys.vargancysplayer.module.home.down.data;
-
-import com.vargancys.vargancysplayer.module.home.data.MediaInfo;
+package com.vargancys.vargancysplayer.module.home.netvideo.data;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

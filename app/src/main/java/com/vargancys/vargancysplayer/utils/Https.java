@@ -1,6 +1,6 @@
 package com.vargancys.vargancysplayer.utils;
 
-import com.vargancys.vargancysplayer.module.home.down.data.NetVideoService;
+import com.vargancys.vargancysplayer.module.home.netvideo.data.NetVideoService;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;

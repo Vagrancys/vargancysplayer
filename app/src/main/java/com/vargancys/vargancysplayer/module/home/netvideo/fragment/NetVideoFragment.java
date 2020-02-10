@@ -1,11 +1,10 @@
-package com.vargancys.vargancysplayer.module.home.down.fragment;
+package com.vargancys.vargancysplayer.module.home.netvideo.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,10 +14,8 @@ import com.vargancys.vargancysplayer.base.BaseFragment;
 import com.vargancys.vargancysplayer.base.BaseRecyclerAdapter;
 import com.vargancys.vargancysplayer.module.common.VideoPlayerActivity;
 import com.vargancys.vargancysplayer.module.home.data.MediaInfo;
-import com.vargancys.vargancysplayer.module.home.down.adapter.NetVideoViewAdapter;
-import com.vargancys.vargancysplayer.module.home.down.data.NetVideoInfo;
-import com.vargancys.vargancysplayer.utils.CacheUtils;
-import com.vargancys.vargancysplayer.utils.Constants;
+import com.vargancys.vargancysplayer.module.home.netvideo.adapter.NetVideoViewAdapter;
+import com.vargancys.vargancysplayer.module.home.netvideo.data.NetVideoInfo;
 import com.vargancys.vargancysplayer.utils.Https;
 
 import java.util.ArrayList;
@@ -27,7 +24,6 @@ import butterknife.BindView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.HTTP;
 
 /**
  * author: Vagrancy
@@ -35,7 +31,7 @@ import retrofit2.http.HTTP;
  * time  : 2020/02/03
  * version:1.0
  */
-public class DownFragment extends BaseFragment {
+public class NetVideoFragment extends BaseFragment {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.layout_empty)
@@ -47,13 +43,13 @@ public class DownFragment extends BaseFragment {
     private NetVideoViewAdapter mNet;
     private boolean isData = false;
     private Context mContext;
-    public static DownFragment newInstance(){
-        return new DownFragment();
+    public static NetVideoFragment newInstance(){
+        return new NetVideoFragment();
     }
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_down;
+        return R.layout.fragment_net_video;
     }
 
     @Override

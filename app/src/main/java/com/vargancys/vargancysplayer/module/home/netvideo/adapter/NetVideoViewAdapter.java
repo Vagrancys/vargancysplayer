@@ -1,19 +1,15 @@
-package com.vargancys.vargancysplayer.module.home.home.adapter;
+package com.vargancys.vargancysplayer.module.home.netvideo.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.text.format.Formatter;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.vargancys.vargancysplayer.R;
-import com.vargancys.vargancysplayer.Utils;
 import com.vargancys.vargancysplayer.base.BaseRecyclerAdapter;
 import com.vargancys.vargancysplayer.module.home.data.MediaInfo;
 
@@ -25,33 +21,35 @@ import butterknife.ButterKnife;
 /**
  * author: Vagrancy
  * e-mail: 18050829067@163.com
- * time  : 2020/02/03
+ * time  : 2020/02/09
  * version:1.0
  */
-public class HomeViewAdapter extends BaseRecyclerAdapter {
+public class NetVideoViewAdapter extends BaseRecyclerAdapter {
     private Context mContext;
     private ArrayList<MediaInfo> Medias;
-    private Utils utils;
 
-    public HomeViewAdapter(Context context, ArrayList<MediaInfo> medias) {
+    public NetVideoViewAdapter(Context context, ArrayList<MediaInfo> medias) {
         this.mContext = context;
         this.Medias = medias;
-        this.utils = new Utils();
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new HomeViewHolder(View.inflate(mContext, R.layout.home_item, null));
+        return new NetVideoViewHolder(View.inflate(mContext, R.layout.net_video_item, null));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        HomeViewHolder mHolder = (HomeViewHolder) holder;
+        NetVideoViewHolder mHolder = (NetVideoViewHolder) holder;
         final MediaInfo mediaInfo = Medias.get(position);
+        Glide.with(mContext)
+                .load(mediaInfo.getImage())
+                .placeholder(R.drawable.icon_video)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(mHolder.VideoImg);
         mHolder.VideoTitle.setText(mediaInfo.getName());
-        mHolder.VideoSize.setText(Formatter.formatFileSize(mContext,mediaInfo.getSize()));
-        mHolder.VideoTime.setText(utils.stringForTime((int) mediaInfo.getDuration()));
+        mHolder.VideoDesc.setText(mediaInfo.getDesc());
     }
 
     @Override
@@ -59,14 +57,14 @@ public class HomeViewAdapter extends BaseRecyclerAdapter {
         return Medias.size();
     }
 
-    class HomeViewHolder extends ViewHolder {
+    class NetVideoViewHolder extends ViewHolder {
+        @BindView(R.id.video_img)
+        ImageView VideoImg;
         @BindView(R.id.video_title)
         TextView VideoTitle;
-        @BindView(R.id.video_time)
-        TextView VideoTime;
-        @BindView(R.id.video_size)
-        TextView VideoSize;
-        HomeViewHolder(View itemView) {
+        @BindView(R.id.video_desc)
+        TextView VideoDesc;
+        NetVideoViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(itemView);
         }

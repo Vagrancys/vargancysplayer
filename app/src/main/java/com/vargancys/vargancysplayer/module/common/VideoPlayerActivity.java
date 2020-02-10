@@ -513,10 +513,6 @@ public class VideoPlayerActivity extends BaseActivity implements View.OnClickLis
         activity.startActivity(intent);
     }
 
-    @OnClick({R.id.btn_video_start_pause,
-            R.id.btn_video_pre,R.id.btn_video_next,
-            R.id.btn_exit,R.id.btn_video_switch_screen,
-            R.id.btn_voice,R.id.btn_switch})
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_voice:

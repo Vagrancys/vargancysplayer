@@ -4,9 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.vargancys.vargancysplayer.module.home.down.fragment.DownFragment;
-import com.vargancys.vargancysplayer.module.home.home.fragment.HomeFragment;
-import com.vargancys.vargancysplayer.module.home.local.fragment.LocalFragment;
+import com.vargancys.vargancysplayer.module.home.netvideo.fragment.NetVideoFragment;
+import com.vargancys.vargancysplayer.module.home.video.fragment.VideoFragment;
+import com.vargancys.vargancysplayer.module.home.music.fragment.MusicFragment;
 import com.vargancys.vargancysplayer.module.home.my.fragment.MyFragment;
 
 /**
@@ -30,13 +30,13 @@ public class HomePagerAdapter extends FragmentPagerAdapter{
         if(mFragment[position] == null){
             switch (position){
                 case 0:
-                    mFragment[position] = HomeFragment.newInstance();
+                    mFragment[position] = VideoFragment.newInstance();
                     break;
                 case 1:
-                    mFragment[position] = LocalFragment.newInstance();
+                    mFragment[position] = MusicFragment.newInstance();
                     break;
                 case 2:
-                    mFragment[position] = DownFragment.newInstance();
+                    mFragment[position] = NetVideoFragment.newInstance();
                     break;
                 case 3:
                     mFragment[position] = MyFragment.newInstance();

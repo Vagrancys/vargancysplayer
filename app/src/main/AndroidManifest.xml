@@ -44,9 +44,14 @@
                 <data android:mimeType="video/3gpp2" />
             </intent-filter>
         </activity>
-        <activity android:name=".module.common.MusicPlayerActivity">
-
+        <activity android:name=".module.common.MusicPlayerActivity"
+            android:launchMode="singleTask">
         </activity>
+        <service android:name=".module.home.music.service.MusicPlayerService">
+            <intent-filter>
+                <action android:name="com.vargancys.mobileplayer_OPENAUDIO"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

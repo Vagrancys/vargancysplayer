@@ -1,4 +1,4 @@
-package com.vargancys.vargancysplayer.module.home.local.adapter;
+package com.vargancys.vargancysplayer.module.home.music.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,9 +10,7 @@ import android.widget.TextView;
 import com.vargancys.vargancysplayer.R;
 import com.vargancys.vargancysplayer.Utils;
 import com.vargancys.vargancysplayer.base.BaseRecyclerAdapter;
-import com.vargancys.vargancysplayer.module.home.data.MediaInfo;
 import com.vargancys.vargancysplayer.module.home.data.MusicInfo;
-import com.vargancys.vargancysplayer.module.home.home.adapter.HomeViewAdapter;
 
 import java.util.ArrayList;
 
@@ -25,12 +23,12 @@ import butterknife.ButterKnife;
  * time  : 2020/02/09
  * version:1.0
  */
-public class LocalViewAdapter  extends BaseRecyclerAdapter {
+public class MusicViewAdapter extends BaseRecyclerAdapter {
     private Context mContext;
     private ArrayList<MusicInfo> Musics;
     private Utils utils;
 
-    public LocalViewAdapter(Context context, ArrayList<MusicInfo> musics) {
+    public MusicViewAdapter(Context context, ArrayList<MusicInfo> musics) {
         this.mContext = context;
         this.Musics = musics;
         this.utils = new Utils();

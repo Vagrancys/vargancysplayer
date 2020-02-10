@@ -1,9 +1,8 @@
-package com.vargancys.vargancysplayer.module.home.down.data;
+package com.vargancys.vargancysplayer.module.home.netvideo.data;
 
 import com.vargancys.vargancysplayer.module.home.data.MediaInfo;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * author: Vagrancy

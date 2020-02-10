@@ -1,6 +1,7 @@
 package com.vargancys.vargancysplayer.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 
 /**
@@ -18,5 +19,15 @@ public class CacheUtils {
     public static String getString(Context context,String key){
         SharedPreferences sharedPreferences = context.getSharedPreferences("play",context.MODE_PRIVATE);
         return sharedPreferences.getString(key,"");
+    }
+
+    public static void putInt(Context context,String key,int value){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("play",Context.MODE_PRIVATE);
+        sharedPreferences.edit().putInt(key, value).commit();
+    }
+
+    public static Integer getInt(Context context, String key){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("play",context.MODE_PRIVATE);
+        return sharedPreferences.getInt(key,0);
     }
 }
