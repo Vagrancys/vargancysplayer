@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.media.audiofx.Visualizer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,12 +28,15 @@ import com.vargancys.vargancysplayer.base.BaseActivity;
 import com.vargancys.vargancysplayer.module.home.data.MediaInfo;
 import com.vargancys.vargancysplayer.module.home.data.MusicInfo;
 import com.vargancys.vargancysplayer.module.home.music.service.MusicPlayerService;
+import com.vargancys.vargancysplayer.utils.LyricUtils;
+import com.vargancys.vargancysplayer.widget.BaseVisualizerView;
 import com.vargancys.vargancysplayer.widget.ShowLyricView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -55,7 +59,7 @@ public class MusicPlayerActivity extends BaseActivity implements View.OnClickLis
     private static final int SHOW_LYRIC = 2;
 
     @BindView(R.id.iv_icon)
-    ImageView ivIcon;
+    BaseVisualizerView ivIcon;
     @BindView(R.id.tv_author)
     TextView tvAuthor;
     @BindView(R.id.tv_title)
@@ -82,6 +86,7 @@ public class MusicPlayerActivity extends BaseActivity implements View.OnClickLis
     private MyReceiver receiver;
     private int position = 0;
     private IMusicPlayerService service;
+    private Visualizer mVisualizer;
     private ServiceConnection con = new ServiceConnection() {
         /**
          * 当连接成功的时候回调这个方法
@@ -139,6 +144,7 @@ public class MusicPlayerActivity extends BaseActivity implements View.OnClickLis
         getData();
         bindAndStartService();
         seekMusic.setOnSeekBarChangeListener(new MyOnSeekBarChangeListener());
+
     }
 
     class MyOnSeekBarChangeListener implements SeekBar.OnSeekBarChangeListener{
@@ -174,6 +180,20 @@ public class MusicPlayerActivity extends BaseActivity implements View.OnClickLis
         EventBus.getDefault().register(this);
         setListener();
     }
+
+    private void setupVisualizerFxAndUi(){
+        try {
+            int audioSessionId = service.getAudioSessionId();
+            mVisualizer = new Visualizer(audioSessionId);
+            mVisualizer.setCaptureSize(Visualizer.getCaptureSizeRange()[1]);
+            ivIcon.setVisualizer(mVisualizer);
+            mVisualizer.setEnabled(true);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     private void setListener(){
         btnMusicPre.setOnClickListener(this);
         btnMusicStartPause.setOnClickListener(this);
@@ -191,9 +211,30 @@ public class MusicPlayerActivity extends BaseActivity implements View.OnClickLis
     //3.eventBus 订阅方法
     @Subscribe(threadMode = ThreadMode.MAIN,sticky = false,priority = 0)
     public void showData(MusicInfo musicInfo){
-        handler.sendEmptyMessage(SHOW_LYRIC);
+        showLyric();
+
         showViewData();
         checkPlayMode();
+        setupVisualizerFxAndUi();
+    }
+
+    private void showLyric(){
+        LyricUtils lyricUtils =  new LyricUtils();
+        try {
+            String path = service.getAudioPath();
+            path = path.substring(0,path.lastIndexOf("."));
+            File file = new File(path + ".lrc");
+            if(!file.exists()){
+                file = new File(path + ".txt");
+            }
+            lyricUtils.readLyricFile(file);
+            showLyricView.setLyrics(lyricUtils.getLyrics());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        if(lyricUtils.isExistLyric()){
+            handler.sendEmptyMessage(SHOW_LYRIC);
+        }
     }
 
     private void showViewData(){
@@ -216,7 +257,7 @@ public class MusicPlayerActivity extends BaseActivity implements View.OnClickLis
                     //显示歌词
                     try {
                         int currentPosition = service.getCurrentPosition();
-                        showLyricView.setshowNextLyric(currentPosition);
+                        showLyricView.setShowNextLyric(currentPosition);
                         handler.removeMessages(SHOW_LYRIC);
                         handler.sendEmptyMessage(SHOW_LYRIC);
                     } catch (RemoteException e) {
@@ -356,6 +397,12 @@ public class MusicPlayerActivity extends BaseActivity implements View.OnClickLis
             }else{
                 btnPlaymode.setBackgroundResource(R.drawable.btn_playmode_normal_selector);
             }
+            //校验播放暂停的状态
+            if(service.isPlaying()){
+                btnPlaymode.setBackgroundResource(R.drawable.btn_music_start_selector);
+            }else{
+                btnPlaymode.setBackgroundResource(R.drawable.btn_music_pause_selector);
+            }
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -376,5 +423,13 @@ public class MusicPlayerActivity extends BaseActivity implements View.OnClickLis
         }
 
         super.onDestroy();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(mVisualizer != null){
+            mVisualizer.release();
+        }
     }
 }

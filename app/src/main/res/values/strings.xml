@@ -13,4 +13,6 @@
     <string name="tv_time">00:00/10:23</string>
     <string name="buffer_title">缓存中.....</string>
     <string name="loading_title">加载中...</string>
+    <string name="search_text">搜索</string>
+    <string name="no_data">抱歉! 没有搜到你要的内容....</string>
 </resources>

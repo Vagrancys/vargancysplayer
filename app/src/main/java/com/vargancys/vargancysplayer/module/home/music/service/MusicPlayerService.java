@@ -176,6 +176,11 @@ public class MusicPlayerService extends Service {
         public void seekTo(int progress) throws RemoteException {
             service.seekTo(progress);
         }
+
+        @Override
+        public int getAudioSessionId() throws RemoteException {
+            return service.getAudioSessionId();
+        }
     };
 
     //打开音乐
@@ -300,7 +305,7 @@ public class MusicPlayerService extends Service {
      * @return
      */
     private String getAudioPath(){
-        return "";
+        return musicInfo.getData();
     }
 
     /**
@@ -427,6 +432,10 @@ public class MusicPlayerService extends Service {
 
     private void seekTo(int progress){
         mediaPlayer.seekTo(progress);
+    }
+
+    private int getAudioSessionId(){
+        return mediaPlayer.getAudioSessionId();
     }
 }
 

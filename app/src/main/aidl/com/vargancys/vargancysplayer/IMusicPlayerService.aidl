@@ -75,6 +75,8 @@ interface IMusicPlayerService {
         boolean isPlaying();
 
         void seekTo(int progress);
+
+        int getAudioSessionId();
 }
 
 

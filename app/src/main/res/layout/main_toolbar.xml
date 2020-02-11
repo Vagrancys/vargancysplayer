@@ -13,8 +13,8 @@
         android:layout_height="@dimen/margin_size_40dp"
         android:layout_marginEnd="@dimen/margin_size_10dp"
         android:src="@drawable/home_logo" />
-    <EditText
-        android:id="@+id/main_edit"
+    <TextView
+        android:id="@+id/main_search"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:drawableStart="@drawable/home_search"
@@ -30,7 +30,7 @@
         android:layout_marginStart="@dimen/margin_size_10dp"
         android:src="@drawable/home_game" />
     <ImageView
-        android:id="@+id/main_search"
+        android:id="@+id/main_history"
         android:layout_width="@dimen/margin_size_40dp"
         android:layout_height="@dimen/margin_size_40dp"
         android:src="@drawable/home_history"/>

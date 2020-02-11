@@ -9,4 +9,8 @@ package com.vargancys.vargancysplayer.utils;
 public class Constants {
     public static final String NET_URI = "";
     public static final String HTTP = "";
+    public static final String NET_SEARCH_URI = "http://hot.news.cntv.cn/index.php?" +
+            "controller=list&" +
+            "action=searchList&" +
+            "sort=date&n=20&wd=";
 }

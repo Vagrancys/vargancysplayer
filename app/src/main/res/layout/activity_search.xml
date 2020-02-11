@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_size_60dp"
+        android:orientation="horizontal"
+        android:padding="@dimen/margin_size_10dp"
+        android:gravity="center"
+        android:background="@color/blue">
+        <EditText
+            android:id="@+id/search_edit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:drawableStart="@drawable/home_search"
+            android:paddingStart="@dimen/margin_size_10dp"
+            android:background="@drawable/home_tool_shape"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:id="@+id/search_voice"
+            android:layout_width="@dimen/margin_size_40dp"
+            android:layout_height="@dimen/margin_size_40dp"
+            android:layout_marginEnd="@dimen/margin_size_10dp"
+            android:layout_marginStart="@dimen/margin_size_10dp"
+            android:src="@drawable/voice_empty" />
+        <TextView
+            android:id="@+id/search_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_text"
+            android:textColor="@color/black_1"
+            android:textSize="@dimen/text_size_18sp"/>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:scrollbars="none"/>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
+        <TextView
+            android:id="@+id/tv_nodata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_data"
+            android:textSize="@dimen/text_size_18sp"
+            android:textColor="@color/black"
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+</LinearLayout>

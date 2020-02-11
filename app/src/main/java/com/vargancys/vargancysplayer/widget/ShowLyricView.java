@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 import com.vargancys.vargancysplayer.module.home.data.Lyric;
+import com.vargancys.vargancysplayer.utils.DensityUtil;
 
 import java.util.ArrayList;
 
@@ -27,13 +28,13 @@ public class ShowLyricView extends AppCompatTextView{
     private int height;
     //歌词列表中的索引
     private int index;
-    private int textHeight = 20;
+    private float textHeight;
     //当前播放进度
-    private int currentPosition;
+    private float currentPosition;
     //高亮显示的时间
-    private long sleepTime;
+    private float sleepTime;
     //时间戳 什么时刻到高亮哪句歌词
-    private long timePoint;
+    private float timePoint;
 
     public void setLyrics(ArrayList<Lyric> lyrics) {
         this.lyrics = lyrics;
@@ -49,7 +50,7 @@ public class ShowLyricView extends AppCompatTextView{
 
     public ShowLyricView(Context context,AttributeSet attrs,int defstyleAttr){
         super(context, attrs,defstyleAttr);
-        initView();
+        initView(context);
     }
 
     @Override
@@ -59,19 +60,22 @@ public class ShowLyricView extends AppCompatTextView{
         height = h;
     }
 
-    private void initView(){
+    private void initView(Context context){
+
+        textHeight = DensityUtil.dip2px(context,20);
         paint = new Paint();
         paint.setColor(Color.GREEN);
-        paint.setTextSize(20);
+        paint.setTextSize(DensityUtil.dip2px(context,20));
         paint.setAntiAlias(true);
         paint.setTextAlign(Paint.Align.CENTER);
 
         whitePaint = new Paint();
         whitePaint.setColor(Color.GREEN);
-        whitePaint.setTextSize(20);
+        whitePaint.setTextSize(DensityUtil.dip2px(context,20));
         whitePaint.setAntiAlias(true);
         whitePaint.setTextAlign(Paint.Align.CENTER);
         lyrics = new ArrayList<>();
+
 
     }
 
@@ -79,9 +83,19 @@ public class ShowLyricView extends AppCompatTextView{
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if(lyrics !=null && lyrics.size()> 0){
+            float plush = 0;
+            if(sleepTime == 0){
+                plush = 0;
+            }else{
+                //平移
+                //这一句所花的时间：休眠时间 = 移动的距离 ：总距离(行高)
+                //移动的距离
+                plush = textHeight + ((currentPosition - timePoint) / sleepTime) * textHeight;
+            }
+            canvas.translate(0,-plush);
             String currentText = lyrics.get(index).getContent();
             canvas.drawText(currentText,width/2,height/2,paint);
-            int tempY = height/2;
+            float tempY = height/2;
             for (int i = index-1;i>=0;i--){
                 String preText = lyrics.get(i).getContent();
                 tempY = tempY - textHeight;
